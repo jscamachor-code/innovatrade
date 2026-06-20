@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnovaTrade S.A. - Soluciones de Comercio Exterior</title>
+    <style>
+        :root {
+            --primary: #1e293b;       
+            --secondary: #3b82f6;     
+            --accent: #10b981;        
+            --bg-light: #f8fafc;      
+            --text-dark: #334155;     
+            --text-light: #64748b;    
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-text span { color: var(--secondary); }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nav-menu a:hover { color: var(--secondary); }
+
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #94a3b8;
+        }
+
+        .badge {
+            background: #38bdf8;
+            color: #0f172a;
+            padding: 4px 12px;
+            font-weight: 600;
+            font-size: 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .rubric-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .rubric-card h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 15px;
+            color: var(--secondary);
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: center;
+        }
+
+        p {
+            color: var(--text-dark);
+            font-size: 14.5px;
+            margin-bottom: 10px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        li { margin-bottom: 4px; }
+
+        .highlight-text {
+            background: #f0fdf4;
+            border-left: 4px solid var(--accent);
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .img-wrapper {
+            border-radius: 6px;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .plan-box {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .plan-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .plan-title { font-size: 16px; font-weight: 700; color: var(--primary); }
+        .plan-price { font-size: 20px; font-weight: 700; color: var(--secondary); }
+
+        .btn-pay {
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-pay:hover { background: var(--primary); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-box {
+            background: var(--white);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+        }
+
+        .modal-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-body { padding: 20px; }
+
+        .form-input {
+            width: 100%; padding: 8px; border: 1px solid #cbd5e1;
+            border-radius: 4px; margin-top: 5px; margin-bottom: 12px;
+        }
+
+        #chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            height: 420px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            z-index: 9999;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
+
+        #chat-widget.minimized { height: 40px; }
+
+        #chat-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 15px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #chat-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #chat-body {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            background: #f1f5f9;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-widget.minimized #chat-body,
+        #chat-widget.minimized #chat-footer {
+            opacity: 0; pointer-events: none;
+        }
+
+        .chat-msg {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            max-width: 85%;
+        }
+
+        .chat-msg.bot { background: #e2e8f0; color: var(--text-dark); align-self: flex-start; }
+        .chat-msg.user { background: var(--secondary); color: var(--white); align-self: flex-end; }
+
+        #chat-footer {
+            padding: 8px;
+            border-top: 1px solid #e2e8f0;
+            background: #ffffff;
+            display: flex;
+            gap: 6px;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        #chat-send-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+        }
+
+        .footer-sect h3 { color: #38bdf8; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; }
+        .footer-sect p { color: #cbd5e1; font-size: 13px; margin-bottom: 6px; }
+        .footer-bottom { max-width: 1200px; margin: 15px auto 0 auto; text-align: center; font-size: 12px; color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <!-- PASARELA DE PAGOS -->
+    <div class="modal-overlay" id="pasarela">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h4>Procesamiento de Pago Seguro</h4>
+                <p style="font-size: 11px; opacity: 0.8;">InnovaTrade S.A. - Terminal de Recaudo</p>
+                <button onclick="document.getElementById('pasarela').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; color:white; font-size:20px; cursor:pointer;">&times;</button>
+            </div>
+            <div class="modal-body" id="formPago">
+                <div style="background:#f1f5f9; padding:10px; border-radius:4px; margin-bottom:12px;">
+                    <p style="margin:0; font-size:12px; color:var(--text-light);">Servicio a contratar:</p>
+                    <strong style="font-size:14px; color:var(--primary);" id="nomeProd">Consultoría</strong>
+                    <p style="margin:0; font-size:15px; color:var(--secondary); font-weight:bold;" id="precoProd">$0.00 USD</p>
+                </div>
+                <form onsubmit="procesarSimulacion(event)">
+                    <label style="font-size:11px; font-weight:bold;">Nombre del Titular</label>
+                    <input type="text" class="form-input" placeholder="Juan Pérez" required>
+                    
+                    <label style="font-size:11px; font-weight:bold;">Número de Tarjeta</label>
+                    <input type="text" class="form-input" placeholder="4532 0000 0000 0000" maxlength="19" required>
+
+                    <div style="display:flex; gap:10px;">
+                        <div style="flex:1;">
+                            <label style="font-size:11px; font-weight:bold;">Fecha (MM/AA)</label>
+                            <input type="text" class="form-input" placeholder="12/28" maxlength="5" required>
+                        </div>
+                        <div style="flex:1;">
+                            <label style="font-size:11px; font-weight:bold;">CVC</label>
+                            <input type="password" class="form-input" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="btnProcesar" class="btn-pay" style="width:100%;">Pagar Servicio</button>
+                </form>
+            </div>
+            <div class="modal-body" id="sucessoPago" style="display:none; text-align:center; padding:20px 10px;">
+                <span style="font-size:35px; color:var(--accent);">✓</span>
+                <h3 style="color:var(--primary); margin-top:5px;">¡Transacción Aprobada!</h3>
+                <p style="font-size:13px;">El pago se ha procesado con éxito. Un consultor se pondrá en contacto en las próximas horas para iniciar el servicio.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-box">
+                <!-- LOGO DEVUELTO -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 21H21" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M5 17H7V13H5V17Z" fill="#1e293b"/>
+                    <path d="M10 17H12V9H10V17Z" fill="#1e293b"/>
+                    <path d="M15 17H17V5H15V17Z" fill="#3b82f6"/>
+                    <path d="M19 3L21 5M21 5L19 7M21 5H13" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="logo-text">Innova<span>Trade</span> S.A.</div>
+            </div>
+            <div class="nav-menu">
+                <a href="#servicio">El Servicio</a>
+                <a href="#empresa">Quiénes Somos</a>
+                <a href="#mercado">Mercado</a>
+                <a href="#portafolio">Planes</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <span class="badge">Consultoría Internacional</span>
+        <h1>InnovaTrade S.A. - Asesoría en Comercio Exterior</h1>
+        <p>Ayudamos a que las pequeñas empresas de la región puedan vender en el extranjero usando internet, páginas web y logística internacional.</p>
+    </section>
+
+    <!-- CUERPO DEL PROYECTO -->
+    <div class="main-container">
+
+        <!-- SECCIÓN: SELECCIÓN DEL SERVICIO -->
+        <div class="rubric-card" id="servicio">
+            <h2>1. Tipo de Servicio y Justificación</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>¿Qué servicio ofrecemos?</h3>
+                    <p>Ofrecemos un servicio de consultoría técnica y apoyo digital para comercio exterior. Básicamente nos enfocamos en tres cosas que frenan a las empresas pequeñas: cómo organizar los envíos pequeños (Logística B2C), cómo configurar botones de pago internacionales en sus páginas y cómo cumplir con los papeles de aduanas sin morir en el intento.</p>
+                    
+                    <h3>Justificación (Por qué elegimos este sector)</h3>
+                    <p>Elegimos esto porque investigamos que muchas microempresas y PyMEs de nuestro país hacen productos muy buenos (como ropa de diseño, café especial o artesanías de alta calidad) que la gente de otros países compraría con gusto.</p>
+                    <p>El problema real es que los dueños no saben cómo mandar un paquete individual al extranjero por aduanas o les da miedo que los estafen con los pagos de afuera. InnovaTrade S.A. nace para solucionar ese problema específico, haciendo que exportar no sea solo para las empresas gigantes.</p>
+                </div>
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Cajas de envíos">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: DESCRIPCIÓN DE LA EMPRESA -->
+        <div class="rubric-card" id="empresa">
+            <h2>2. Datos Generales de la Empresa</h2>
+            <p><strong>InnovaTrade S.A.</strong> Funciona como una firma de consultoría y soporte que ayuda a cambiar el chip de las empresas que solo venden en su ciudad, abriéndoles las puertas para que exporten directamente al consumidor final por medio de plataformas web.</p>
+            
+            <div class="grid-2" style="margin-top: 15px; align-items: stretch;">
+                <div style="background:#f8fafc; padding:15px; border-radius:6px; border-left:4px solid var(--secondary);">
+                    <strong style="color:var(--primary);">Nuestra Misión</strong>
+                    <p style="font-size:13px; margin-top:5px;">Lograr que las PyMEs locales puedan vender afuera de forma segura, dándoles la asesoría legal y las herramientas web necesarias para que sus productos lleguen a cualquier parte del mundo.</p>
+                </div>
+                <div style="background:#f8fafc; padding:15px; border-radius:6px; border-left:4px solid var(--accent);">
+                    <strong style="color:var(--primary);">Nuestra Visión (2026)</strong>
+                    <p style="font-size:13px; margin-top:5px;">Para el año 2026, queremos ser reconocidos a nivel nacional como la consultora que ayudó a digitalizar y abrir mercados internacionales a más de 5,000 marcas medianas y pequeñas.</p>
+                </div>
+            </div>
+
+            <h3>¿Quién es nuestro cliente ideal?</h3>
+            <p>Nuestros clientes son gerentes, dueños o fundadores de PyMEs que fabrican productos locales (textiles, alimentos procesados, artesanías top). Tienen ganas de crecer hacia mercados como Estados Unidos o Europa, pero no tienen un departamento de comercio exterior en su empresa ni saben de páginas de internet transaccionales.</p>
+        </div>
+
+        <!-- SECCIÓN: INVESTIGACIÓN DEL MERCADO OBJETIVO -->
+        <div class="rubric-card" id="mercado">
+            <h2>3. Estudio del Mercado Objetivo</h2>
+            <p>Nos centramos en empresas que ya están constituidas legalmente y que venden bien por redes sociales o de forma local, pero que tienen miedo o falta de conocimiento para dar el salto internacional.</p>
+            
+            <ul>
+                <li><strong>Qué necesitan:</strong> Tarifas de envío que no sean exageradas para paquetes individuales, saber qué papeles ponerle a la caja para que no la retenga la aduana y un sistema en su web para cobrar en dólares o euros.</li>
+                <li><strong>Oportunidad:</strong> La mayoría de los pequeños empresarios cree que para exportar se necesita un contenedor completo, lo cual es falso gracias al e-commerce transfronterizo.</li>
+            </ul>
+
+            <h3>Competencia (Cómo nos diferenciamos)</h3>
+            <p>Analizando el entorno actual, la competencia está dividida en dos extremos:</p>
+            <ol>
+                <li><strong>Las Agencias de Aduana tradicionales:</strong> Solo les interesa trabajar con empresas grandes que mueven contenedores gigantes y cobran comisiones que una PyME no puede pagar.</li>
+                <li><strong>Las empresas de mensajería (como DHL o FedEx):</strong> Te llevan el paquete de un punto A a un punto B, pero no te enseñan a hacer los contratos, no te ayudan con los impuestos de destino ni te arman la pasarela de pagos en tu web. Nosotros unimos todo eso en un solo lugar.</li>
+            </ol>
+        </div>
+
+        <!-- SECCIÓN: IDENTIDAD VISUAL Y PLANES -->
+        <div class="rubric-card" id="portafolio">
+            <h2>4. Identidad Visual y Oferta de Servicios</h2>
+            
+            <p>Para los colores decidimos usar el Azul Oscuro porque da seriedad y confianza (muy importante en temas de aduanas y leyes) combinado con tonos Azules Claros y Verdes para que se note que es un proyecto moderno y enfocado en tecnología digital.</p>
+
+            <h3 style="margin-bottom:15px; margin-top:20px;">Planes y Servicios Disponibles</h3>
+            
+            <!-- PLAN 1 -->
+            <div class="plan-box">
+                <div class="plan-header-flex">
+                    <div class="plan-title">Revisión y Diagnóstico Logístico B2C</div>
+                    <div class="plan-price">$199.00 <span style="font-size:11px; color:var(--text-light); font-weight:normal;">USD</span></div>
+                </div>
+                <p>Revisamos cómo estás empacando y mandando tus productos. Te ayudamos a negociar tarifas con las empresas de mensajería internacional para que los envíos individuales te salgan más económicos y competitivos.</p>
+                <div style="text-align:right; margin-top:10px;">
+                    <button class="btn-pay" onclick="abrirPasarela('Revisión Logística B2C', 199.00)">Adquirir Plan</button>
+                </div>
+            </div>
+
+            <!-- PLAN 2 -->
+            <div class="plan-box">
+                <div class="plan-header-flex">
+                    <div class="plan-title">Montaje de Tienda e Integración de Pagos</div>
+                    <div class="plan-price">$299.00 <span style="font-size:11px; color:var(--text-light); font-weight:normal;">USD</span></div>
+                </div>
+                <p>Te dejamos lista la página web con los botones de pago configurados para recibir tarjetas internacionales de forma segura, incluyendo protección contra fraudes y cambios automáticos de moneda.</p>
+                <div style="text-align:right; margin-top:10px;">
+                    <button class="btn-pay" onclick="abrirPasarela('Montaje de Tienda', 299.00)">Adquirir Plan</button>
+                </div>
+            </div>
+
+            <!-- PLAN 3 -->
+            <div class="plan-box">
+                <div class="plan-header-flex">
+                    <div class="plan-title">Asesoría Aduanera y Plan Born Global</div>
+                    <div class="plan-price">$450.00 <span style="font-size:11px; color:var(--text-light); font-weight:normal;">USD</span></div>
+                </div>
+                <p>Es el plan completo. Te armamos toda la estrategia de comercio exterior, te enseñamos a llenar las declaraciones aduaneras y a automatizar el papeleo legal para que no tengas problemas legales.</p>
+                <div style="text-align:right; margin-top:10px;">
+                    <button class="btn-pay" onclick="abrirPasarela('Plan Born Global', 450.00)">Adquirir Plan</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CHATBOT INTERACTIVO -->
+    <div id="chat-widget">
+        <div id="chat-header" onclick="toggleChat()">
+            <span>💬 Soporte en Línea - Consultas</span>
+            <button id="chat-toggle-btn">−</button>
+        </div>
+        <div id="chat-body">
+            <div class="chat-msg bot">¡Hola! Bienvenido al canal de atención de InnovaTrade S.A. Puedes consultarme dudas sobre tarifas de envío, aduanas o sobre el equipo de consultores.</div>
+        </div>
+        <div id="chat-footer">
+            <input type="text" id="chat-input" placeholder="Escribe tu consulta aquí..." onkeypress="evaluarEnter(event)">
+            <button id="chat-send-btn" onclick="procesarMensajeIA()">Enviar</button>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA CON DATOS DEL CONSULTOR -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-sect">
+                <h3>Contacto Principal</h3>
+                <p>Correo de contacto: soluciones@innovatrade.com.co</p>
+                <p>Teléfono de oficina: +57 (601) 555-9000</p>
+                <p>Ubicación: Centro de Negocios Internacionales - Oficina 904</p>
+            </div>
+            <div class="footer-sect" style="border-left: 1px solid #334155; padding-left: 20px;">
+                <h3>Información de la Firma</h3>
+                <p>Consultor Encargado: <strong>JHOAN SEBASTIAN CAMACHO RAMIREZ</strong></p>
+                <p>Área: Herramientas Digitales y Gestión de Negocios Internacionales</p>
+                <p>Facultad de Ciencias Económicas y Administrativas</p>
+                <p>Año de Gestión: 2026</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 InnovaTrade S.A. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- INTERACTIVIDAD SCRIPT -->
+    <script>
+        function toggleChat() {
+            const widget = document.getElementById('chat-widget');
+            const btn = document.getElementById('chat-toggle-btn');
+            widget.classList.toggle('minimized');
+            btn.innerText = widget.classList.contains('minimized') ? '▲' : '−';
+        }
+
+        function abrirPasarela(nombre, precio) {
+            document.getElementById('nomeProd').innerText = nombre;
+            document.getElementById('precoProd').innerText = '$' + precio.toFixed(2) + ' USD';
+            document.getElementById('formPago').style.display = 'block';
+            document.getElementById('sucessoPago').style.display = 'none';
+            document.getElementById('btnProcesar').innerText = 'Pagar Servicio';
+            document.getElementById('btnProcesar').disabled = false;
+            document.getElementById('pasarela').style.display = 'flex';
+        }
+
+        function procesarSimulacion(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnProcesar');
+            btn.innerText = 'Procesando pago...';
+            btn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('formPago').style.display = 'none';
+                document.getElementById('sucessoPago').style.display = 'block';
+            }, 1200);
+        }
+
+        function evaluarEnter(e) {
+            if (e.key === 'Enter') {
+                procesarMensajeIA();
+            }
+        }
+
+        function procesarMensajeIA() {
+            const input = document.getElementById('chat-input');
+            const msgText = input.value.trim();
+            if (!msgText) return;
+
+            const chatBody = document.getElementById('chat-body');
+            
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerText = msgText;
+            chatBody.appendChild(userDiv);
+            
+            input.value = "";
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            const consulta = msgText.toLowerCase();
+            let respuesta = "";
+
+            if (consulta.includes('precio') || consulta.includes('plan') || consulta.includes('costo') || consulta.includes('cuanto cuesta')) {
+                respuesta = "Nuestros servicios fijos incluyen: Revisión Logística ($199 USD), Montaje de Tienda ($299 USD) y el Plan Born Global completo ($450 USD).";
+            } else if (consulta.includes('quien') || consulta.includes('encargado') || consulta.includes('autor') || consulta.includes('jhoan')) {
+                respuesta = "El consultor principal a cargo de la gestión técnica es Jhoan Sebastian Camacho Ramirez.";
+            } else if (consulta.includes('ayuda') || consulta.includes('exportar') || consulta.includes('que hacen')) {
+                respuesta = "Asesoramos y estructuramos canales digitales para que las PyMEs locales logren exportar de forma directa en volúmenes pequeños.";
+            } else if (consulta.includes('hola') || consulta.includes('buenas')) {
+                respuesta = "¡Hola! ¿En qué puedo colaborar con tus dudas operativas el día de hoy?";
+            } else if (consulta.includes('contacto') || consulta.includes('correo') || consulta.includes('telefono')) {
+                respuesta = "Puedes comunicarte a soluciones@innovatrade.com.co o llamar a las líneas telefónicas al pie de página.";
+            } else {
+                respuesta = "Puedes revisar los detalles técnicos sobre ese punto en las secciones informativas del menú superior.";
+            }
+
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerText = respuesta;
+                chatBody.appendChild(botDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 400);
+        }
+    </script>
+</body>
+</html>
